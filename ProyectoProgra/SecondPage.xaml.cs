@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
 using Microsoft.Maui.Controls;
+using ProyectoProgra.Models;
 
 namespace ProyectoProgra
 {
@@ -30,21 +31,41 @@ namespace ProyectoProgra
                 return;
             }
 
+            var newReport = new UserReport
+            {
+                Correo = userEmail,  // Usar Correo en lugar de UserEmail
+                TipoProblema = problemType,
+                Descripcion = problemDescription,
+                Estado = "Pendiente",
+                Municipio = municipio,
+                Colonia = colonia,
+                Calle = calle,
+                NumeroExterior = numeroExterior,
+                Estado_reporte = "Pendiente"
+            };
+
+            // Guardar en SQLite y JSON
+            await App.Database.SaveReportAsync(newReport);
+
+            // Guardar en MySQL
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
 
-                var query = "INSERT INTO reporte (TipoProblema, Descripcion, Estado, Municipio, Colonia, Calle, NumeroExterior, Estado_reporte) " +
-                            "VALUES (@TipoProblema, @Descripcion, 'Pendiente', @Municipio, @Colonia, @Calle, @NumeroExterior, 'Pendiente')";
+                var query = "INSERT INTO reporte (Correo, TipoProblema, Descripcion, Estado, Municipio, Colonia, Calle, NumeroExterior, Estado_reporte) " +
+                            "VALUES (@Correo, @TipoProblema, @Descripcion, @Estado, @Municipio, @Colonia, @Calle, @NumeroExterior, @Estado_reporte)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@Correo", userEmail);
                     command.Parameters.AddWithValue("@TipoProblema", problemType);
                     command.Parameters.AddWithValue("@Descripcion", problemDescription);
+                    command.Parameters.AddWithValue("@Estado", "Pendiente");
                     command.Parameters.AddWithValue("@Municipio", municipio);
                     command.Parameters.AddWithValue("@Colonia", colonia);
                     command.Parameters.AddWithValue("@Calle", calle);
                     command.Parameters.AddWithValue("@NumeroExterior", numeroExterior);
+                    command.Parameters.AddWithValue("@Estado_reporte", "Pendiente");
 
                     await command.ExecuteNonQueryAsync();
                 }

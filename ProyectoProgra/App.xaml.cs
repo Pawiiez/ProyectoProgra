@@ -12,9 +12,9 @@ namespace ProyectoProgra
         {
             InitializeComponent();
 
-
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reports.db3");
-            Database = new DatabaseService(dbPath);
+            var jsonPathReportes = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ReporteProblema.json");
+            Database = new DatabaseService(dbPath, jsonPathReportes);
 
             MainPage = new NavigationPage(new MainPage());
         }

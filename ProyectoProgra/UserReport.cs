@@ -6,10 +6,14 @@ namespace ProyectoProgra.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string UserEmail { get; set; } = string.Empty;
-        public string Report { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
-        public string ProblemType { get; set; } = string.Empty; // Añadir esta línea
-        public string Description { get; set; } = string.Empty; // Asegúrate de que la propiedad 'Description' también esté definida
+        public string Correo { get; set; }
+        public string TipoProblema { get; set; }
+        public string Descripcion { get; set; }
+        public string Estado { get; set; }
+        public string Municipio { get; set; }
+        public string Colonia { get; set; }
+        public string Calle { get; set; }
+        public string NumeroExterior { get; set; }
+        public string Estado_reporte { get; set; }
     }
 }
