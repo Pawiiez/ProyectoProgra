@@ -11,6 +11,9 @@ using System;
 //Prueba
 
 
+//Loquita
+
+
 namespace ProyectoProgra
 {
     public partial class RegisterPage : ContentPage
