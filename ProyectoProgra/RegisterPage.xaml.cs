@@ -8,6 +8,9 @@ using System;
 //Holi 
 
 
+//Prueba
+
+
 namespace ProyectoProgra
 {
     public partial class RegisterPage : ContentPage
