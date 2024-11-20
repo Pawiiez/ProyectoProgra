@@ -2,6 +2,12 @@
 using ProyectoProgra.Models;
 using System;
 
+
+
+  
+//Holi 
+
+
 namespace ProyectoProgra
 {
     public partial class RegisterPage : ContentPage
